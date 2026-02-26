@@ -1,22 +1,12 @@
-import { getAllCategories } from "../lib/categories";
-import type { ModelLayoutProps } from "../types";
-import type { Category } from "../types";
-import Link from "next/link";
+import type { ReactNode } from "react"
+import CategoriesNav from "@/app/components/CategoriesNav"
 
-export default function ModelLayout({ children }: ModelLayoutProps) {
-    const categories = getAllCategories()
-    const categoryMap = categories.map((cat: Category) => {
-        return (
-            <Link key={cat.slug} href={`/3d-models/categories/${cat.slug}`}>
-                {cat.displayName}
-            </Link>
-        )
-    })
+export default function ModelsLayout({ children }: { children: ReactNode }) {
 
-    return (
-        <nav>
-            {categoryMap}
-            {children}
-        </nav>
-    )
+  return (
+    <div className="relative flex flex-col min-h-screen md:flex-row">
+      <CategoriesNav />
+      <main className="flex-1 p-4 md:ml-64">{children}</main>
+    </div>
+  )
 }
